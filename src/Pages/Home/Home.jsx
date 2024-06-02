@@ -1,9 +1,7 @@
+import React from "react";
+
 const Home = () => {
-  return (
-    <div>
-      <h1 className="text-3xl">This is homepage section</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Home;
