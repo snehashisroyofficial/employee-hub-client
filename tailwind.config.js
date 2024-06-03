@@ -6,6 +6,9 @@ export default {
       container: {
         center: true,
       },
+      backgroundImage: {
+        bgWave: "url('/src/assets/wave-haikei.svg')",
+      },
     },
   },
   plugins: [require("daisyui")],

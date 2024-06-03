@@ -4,10 +4,11 @@ import logo from "../../assets/log.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { ImSwitch } from "react-icons/im";
+import useAuth from "../../Hooks/useAuth";
 
 const Headers = () => {
   const [menu, setMenu] = useState(true);
-
+  const { user } = useAuth();
   const handleOnChange = () => {
     setMenu(!menu);
   };
@@ -54,42 +55,44 @@ const Headers = () => {
         {/* nav end  */}
 
         <div className="flex items-center gap-6">
-          {/* avatar  */}
-          <div className="dropdown dropdown-bottom">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-12 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+          {user ? (
+            <div className="dropdown dropdown-bottom">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-12 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] shadow p-4  dropdown-content bg-base-100  w-52"
+              >
+                <Link>
+                  <li className="py-2 px-3 font-semibold   flex items-center gap-2 bg-red-600 text-white rounded-full">
+                    <ImSwitch />
+                    Logout
+                  </li>
+                </Link>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] shadow p-4  dropdown-content bg-base-100  w-52"
-            >
-              <Link>
-                <li className="py-2 px-3 font-semibold   flex items-center gap-2 bg-red-600 text-white rounded-full">
-                  <ImSwitch />
-                  Logout
-                </li>
+          ) : (
+            <div className="flex gap-2">
+              <Link to="/login">
+                <button className="bg-white px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-100">
+                  Login
+                </button>
               </Link>
-            </ul>
-          </div>
-
-          {/* buttons  */}
-          <div className="flex gap-2">
-            <button className="bg-white px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-100">
-              Login
-            </button>
-            <button className="bg-orange-500 text-white  px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-400">
-              Register
-            </button>
-          </div>
+              <button className="bg-orange-500 text-white  px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-400">
+                Register
+              </button>
+            </div>
+          )}
         </div>
       </nav>
     </div>
