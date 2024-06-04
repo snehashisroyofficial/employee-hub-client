@@ -3,15 +3,22 @@ import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const WorkSheet = () => {
   const axiosPublic = useAxiosPublic();
   const [startDate, setStartDate] = useState(new Date());
-
-  const { data: worksheet, refetch } = useQuery({
+  const { user, loading } = useAuth();
+  const {
+    data: worksheet,
+    isPending: dataLoding,
+    refetch,
+  } = useQuery({
     queryKey: ["worksheet"],
+    enabled: !loading,
     queryFn: async () => {
-      const res = await axiosPublic.get("/work-sheet");
+      const res = await axiosPublic.get(`/work-sheet/${user?.email}`);
       return res.data;
     },
   });
@@ -22,12 +29,37 @@ const WorkSheet = () => {
     const task = form.task.value;
     const work = form.workinghours.value;
     const date = startDate;
+    const email = user.email;
+    const taskDetails = { task, work, date, email };
 
-    console.log(task, work, date);
+    axiosPublic
+      .post("/work-sheet", taskDetails)
+      .then(() => {
+        refetch();
+        Swal.fire({
+          icon: "success",
+          title: "Task Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
+  console.log(worksheet);
+
+  if (dataLoding) {
+    return (
+      <div>
+        <span className="loading min-h-screen mx-auto loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="space-y-6">
       {/* task add form  */}
       <div>
         <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
@@ -82,7 +114,7 @@ const WorkSheet = () => {
                   className="text-gray-700 dark:text-gray-200"
                   htmlFor="password"
                 >
-                  Password
+                  Date
                 </label>
                 <div className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                   <DatePicker
@@ -106,7 +138,32 @@ const WorkSheet = () => {
         </section>
       </div>
       {/* table tasks  */}
-      <div></div>
+      <div className="max-w-4xl mx-auto  bg-white rounded-md shadow-md dark:bg-gray-800 p-10">
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead className="bg-blue-600 text-xl text-white">
+              <tr>
+                <th>No.</th>
+                <th>Task</th>
+                <th>Hours worked</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {worksheet?.map((workData, idx) => (
+                <tr key={workData._id}>
+                  <th>{idx}</th>
+                  <td>{workData.task}</td>
+                  <td>{workData.work}</td>
+                  <td>{new Date(workData.date).toLocaleDateString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
