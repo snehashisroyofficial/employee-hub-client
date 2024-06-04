@@ -14,8 +14,6 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [role] = useRole();
 
-  console.log(role);
-
   const employeeLinks = (
     <>
       <li>

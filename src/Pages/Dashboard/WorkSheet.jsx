@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const WorkSheet = () => {
   const axiosPublic = useAxiosPublic();
+  const [startDate, setStartDate] = useState(new Date());
 
   const { data: worksheet, refetch } = useQuery({
     queryKey: ["worksheet"],
@@ -13,31 +16,40 @@ const WorkSheet = () => {
     },
   });
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const task = form.task.value;
+    const work = form.workinghours.value;
+    const date = startDate;
+
+    console.log(task, work, date);
+  };
+
   return (
     <div>
       {/* task add form  */}
       <div>
-        <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-          <h2 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+        <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+          <h2 className="text-2xl py-6 font-semibold text-gray-700 capitalize dark:text-white">
             Add Work
           </h2>
 
-          <form>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+          <form onSubmit={handleOnSubmit}>
+            <div className="flex  gap-4">
               {/* tasks  */}
               <div>
-                <label class="text-gray-700 dark:text-gray-200" for="username">
+                <label
+                  className="text-gray-700 dark:text-gray-200"
+                  htmlFor="username"
+                >
                   Tasks
                 </label>
-                {/* <input
-                  id="username"
-                  type="text"
-                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                /> */}
 
                 <select
                   defaultValue=""
-                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  name="task"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 >
                   <option disabled value="">
                     Choose your tasks
@@ -51,46 +63,44 @@ const WorkSheet = () => {
               {/* hours worked  */}
               <div>
                 <label
-                  class="text-gray-700 dark:text-gray-200"
-                  for="hours-worked"
+                  className="text-gray-700 dark:text-gray-200"
+                  htmlFor="hours-worked"
                 >
                   Hours Worked
                 </label>
                 <input
                   id="hours-worked"
                   type="number"
-                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                  name="workinghours"
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                 />
               </div>
-              <div>
-                <label class="text-gray-700 dark:text-gray-200" for="password">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                />
-              </div>
+
+              {/* date picker  */}
               <div>
                 <label
-                  class="text-gray-700 dark:text-gray-200"
-                  for="passwordConfirmation"
+                  className="text-gray-700 dark:text-gray-200"
+                  htmlFor="password"
                 >
-                  Password Confirmation
+                  Password
                 </label>
-                <input
-                  id="passwordConfirmation"
-                  type="password"
-                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                />
+                <div className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                  <DatePicker
+                    selected={startDate}
+                    dateFormat="dd/MM/yyyy"
+                    className="w-full"
+                    onChange={(date) => setStartDate(date)}
+                  />
+                </div>
               </div>
-            </div>
-
-            <div class="flex justify-end mt-6">
-              <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                Save
-              </button>
+              <div className="flex justify-end mt-8">
+                <button
+                  type="submit"
+                  className="px-4 py-2  text-white transition-colors duration-300 transform bg-green-600 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </form>
         </section>
