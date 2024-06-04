@@ -11,11 +11,9 @@ const useRole = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosPublic.get(`/users/${user?.email}`);
-      console.log(res.data.role);
       return res.data.role;
     },
   });
-  console.log(role);
   return [role];
 };
 

@@ -13,7 +13,6 @@ import useRole from "../Hooks/useRole";
 const Dashboard = () => {
   const { user } = useAuth();
   const [role] = useRole();
-  console.log(role);
   const employeeLinks = (
     <>
       <li>
@@ -89,9 +88,9 @@ const Dashboard = () => {
 
   return (
     <div className=" rounded-xl flex ">
-      <div className="min-h-screen w-1/4  bg-gray-200 menu  p-10">
+      <div className="min-h-screen w-[20% ]  bg-gray-200 menu  p-10">
         {user && (
-          <h1 className="text-4xl font-bold">Hi Bro! , {user?.displayName}</h1>
+          <h1 className="text-4xl font-bold">Hi, {user?.displayName}</h1>
         )}
 
         <h1 className="text-2xl mt-10 capitalize">{role} Dashboard</h1>
