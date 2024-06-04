@@ -103,9 +103,11 @@ const Headers = () => {
                   Login
                 </button>
               </Link>
-              <button className="bg-orange-500 text-white  px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-400">
-                Register
-              </button>
+              <Link to="/register">
+                <button className="bg-orange-500 text-white  px-4 py-3 md:px-10 md:py-3 rounded-full font-semibold  hover:bg-orange-400">
+                  Register
+                </button>
+              </Link>
             </div>
           )}
         </div>

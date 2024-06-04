@@ -5,12 +5,14 @@ import { FaEyeSlash, FaLock, FaRegEye } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Login = () => {
   const { signInUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const { register, handleSubmit } = useForm();
+  const axiosPublic = useAxiosPublic();
 
   const handleOnSubmit = (data) => {
     signInUser(data.email, data.password)
@@ -35,7 +37,23 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleSignIn()
-      .then(() => {
+      .then((res) => {
+        const userDetails = {
+          name: res.user.displayName,
+          email: res.user.email,
+          imageUrl: res.user.photoURL,
+          bank_account_no: "",
+          salary: "",
+          designation: "",
+          role: "employee",
+          isVerified: "false",
+        };
+        axiosPublic
+          .post("/users", userDetails)
+          .then((res) => console.log(res.data))
+          .catch((error) => {
+            console.log(error);
+          });
         Swal.fire({
           icon: "success",
           title: "Login Successfull",

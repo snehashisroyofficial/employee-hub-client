@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Authentication/Login/Login";
 import Register from "../Pages/Authentication/Register/Register";
 import Dashboard from "../Layout/Dashboard";
+import WorkSheet from "../Pages/Dashboard/WorkSheet";
 
 const route = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const route = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path: "work-sheet",
+        element: <WorkSheet />,
+      },
+    ],
   },
 ]);
 

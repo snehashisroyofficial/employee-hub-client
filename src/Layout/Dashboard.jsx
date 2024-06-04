@@ -13,11 +13,14 @@ import useRole from "../Hooks/useRole";
 const Dashboard = () => {
   const { user } = useAuth();
   const [role] = useRole();
+
+  console.log(role);
+
   const employeeLinks = (
     <>
       <li>
         <NavLink
-          to="dashboard/work-sheet"
+          to="/dashboard/work-sheet"
           className={({ isActive }) =>
             isActive ? "text-orange-600 w-fit" : "hover:bg-yellow-200 "
           }
@@ -27,7 +30,7 @@ const Dashboard = () => {
       </li>
       <li>
         <NavLink
-          to="dashboard/payment-history"
+          to="/dashboard/payment-history"
           className={({ isActive }) =>
             isActive ? "text-orange-600 w-fit" : "hover:bg-yellow-200 "
           }
@@ -103,10 +106,15 @@ const Dashboard = () => {
             ? employeeLinks
             : null}
           <li>
-            <Link to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-orange-600 w-fit" : "hover:bg-yellow-200 "
+              }
+            >
               <GrHomeRounded />
               Home
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
