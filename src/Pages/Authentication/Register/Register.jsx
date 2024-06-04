@@ -48,6 +48,18 @@ const Register = () => {
     const password = data.password;
     const image = res.data.data.display_url;
 
+    const userDetails = {
+      name: data.fullName,
+      email: data.email,
+      imageUrl: res.data.data.display_url,
+      bank_account_no: data.bankAccountNo,
+      salary: data.salary,
+      designation: data.designation,
+      role: data.role,
+      isVerified: "false",
+    };
+
+    console.log(userDetails);
     // use create
 
     createUser(email, password)
@@ -56,6 +68,20 @@ const Register = () => {
           displayName: name,
           photoURL: image,
         }).then(() => {
+          axiosPublic
+            .post("/users", userDetails)
+            .then(() =>
+              Swal.fire({
+                icon: "success",
+                title: "Registration Successfull",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+            )
+            .catch((error) => {
+              console.log(error.message);
+            });
+
           reset();
           Swal.fire({
             icon: "success",
@@ -113,19 +139,45 @@ const Register = () => {
             </div>
 
             {/* file | col 2 */}
-            <div className="mt-6">
-              <div>
-                <input
-                  type="file"
-                  className="block w-full px-3 py-3 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
-                  {...register("file", { required: true })}
-                />
+            <div className="flex gap-2 items-center mt-6">
+              <div className="w-full">
+                <div>
+                  <input
+                    type="file"
+                    className="block w-full px-3 py-3 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
+                    {...register("file", { required: true })}
+                  />
+                </div>
+                {errors.file && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
-              {errors.file && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
+
+              {/* designation  */}
+              <div className="w-full">
+                <select
+                  defaultValue=""
+                  className="select select-bordered w-full "
+                  {...register("designation", { required: true })}
+                >
+                  <option disabled value="">
+                    Choose your Designation
+                  </option>
+                  <option value="Sales Assistant">Sales Assistant</option>
+                  <option value="Social Media executive">
+                    Social Media executive
+                  </option>
+                  <option value="Digital Marketer">Digital Marketer</option>
+                </select>
+
+                {errors.designation && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* email | col 3  */}
@@ -196,17 +248,18 @@ const Register = () => {
 
               <div className="w-full">
                 <select
+                  defaultValue=""
                   className="select select-bordered w-full "
-                  {...register("options", { required: true })}
+                  {...register("role", { required: true })}
                 >
-                  <option disabled defaultValue>
+                  <option disabled value="">
                     Please choose your role
                   </option>
                   <option value="employee">Employee</option>
                   <option value="hr">Hr</option>
                 </select>
 
-                {errors.salary && (
+                {errors.role && (
                   <span className="text-red-500 text-sm">
                     This field is required
                   </span>

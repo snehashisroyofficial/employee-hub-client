@@ -53,7 +53,7 @@ const Headers = () => {
               className="w-full font-semibold px-5 py-4  hover:text-orange-500
               "
             >
-              <Link>Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li
               className="w-full font-semibold px-5 py-4  hover:text-orange-500

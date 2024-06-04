@@ -7,13 +7,13 @@ import { GrHomeRounded } from "react-icons/gr";
 import { FaUsers } from "react-icons/fa";
 import { RiProgress3Line } from "react-icons/ri";
 import { MdOutlineContactSupport } from "react-icons/md";
+import useRole from "../Hooks/useRole";
 //
 
 const Dashboard = () => {
   const { user } = useAuth();
-
-  const role = "admin";
-
+  const [role] = useRole();
+  console.log(role);
   const employeeLinks = (
     <>
       <li>
@@ -94,7 +94,7 @@ const Dashboard = () => {
           <h1 className="text-4xl font-bold">Hi Bro! , {user?.displayName}</h1>
         )}
 
-        <h1 className="text-2xl mt-10">Employee Dashboard</h1>
+        <h1 className="text-2xl mt-10 capitalize">{role} Dashboard</h1>
         <ul className="font-semibold text-xl space-y-4 py-10">
           {role === "admin"
             ? adminLinks
