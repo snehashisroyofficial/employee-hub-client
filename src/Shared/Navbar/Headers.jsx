@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/log.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { ImSwitch } from "react-icons/im";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Headers = () => {
   const [menu, setMenu] = useState(true);
-  const { user } = useAuth();
+  const { user, logoutUser } = useAuth();
   const handleOnChange = () => {
     setMenu(!menu);
+  };
+
+  // user logout --------------------------->>>>
+  const handleOnLogout = () => {
+    logoutUser().then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successfull",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
   };
 
   return (
@@ -65,7 +77,7 @@ const Headers = () => {
                 <div className="w-12 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    src={user?.photoURL}
                   />
                 </div>
               </div>
@@ -74,10 +86,13 @@ const Headers = () => {
                 className="mt-3 z-[1] shadow p-4  dropdown-content bg-base-100  w-52"
               >
                 <Link>
-                  <li className="py-2 px-3 font-semibold   flex items-center gap-2 bg-red-600 text-white rounded-full">
+                  <button
+                    onClick={handleOnLogout}
+                    className="py-2 px-3 font-semibold   flex items-center gap-2 bg-red-600 text-white rounded-full"
+                  >
                     <ImSwitch />
                     Logout
-                  </li>
+                  </button>
                 </Link>
               </ul>
             </div>

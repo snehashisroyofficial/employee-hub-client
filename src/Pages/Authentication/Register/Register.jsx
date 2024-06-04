@@ -4,9 +4,8 @@ import { FaEyeSlash, FaLock, FaRegEye, FaRegUser } from "react-icons/fa";
 import { LuUpload } from "react-icons/lu";
 import { MdEmail } from "react-icons/md";
 import { AiFillBank } from "react-icons/ai";
-import { RiMoneyRupeeCircleLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { MdAttachMoney } from "react-icons/md";
 import useAuth from "../../../Hooks/useAuth";
 
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
@@ -21,11 +20,14 @@ const Register = () => {
   const { createUser } = useAuth();
   const axiosPublic = useAxiosPublic();
   const auth = getAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const passwordRegex = /^[a-z0-9]{6,}$/;
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const [password, setPassword] = useState(false);
@@ -54,12 +56,14 @@ const Register = () => {
           displayName: name,
           photoURL: image,
         }).then(() => {
+          reset();
           Swal.fire({
             icon: "success",
             title: "Registration Successfull",
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate(location.state ? location.state : "/");
         });
       })
       .catch((error) => {
@@ -77,8 +81,8 @@ const Register = () => {
           >
             {/* title  */}
             <div className="space-y-3">
-              <h1 className="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">
-                Register
+              <h1 className="mt-3 text-2xl font-bold text-gray-800 capitalize sm:text-3xl dark:text-white">
+                Create Account
               </h1>
               <p className="mt-4 text-gray-500 dark:text-gray-400">
                 Let’s get you all set up so you can verify your personal account
@@ -173,7 +177,7 @@ const Register = () => {
               <div className="w-full">
                 <div className="relative flex items-center ">
                   <span className="absolute">
-                    <RiMoneyRupeeCircleLine className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+                    <MdAttachMoney className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
                   </span>
 
                   <input
@@ -192,17 +196,17 @@ const Register = () => {
 
               <div className="w-full">
                 <select
-                  defaultValue="default"
-                  className="select select-bordered w-full"
-                  {...register("role", { required: true })}
+                  className="select select-bordered w-full "
+                  {...register("options", { required: true })}
                 >
-                  <option disabled value="default">
-                    Choose your role
+                  <option disabled defaultValue>
+                    Please choose your role
                   </option>
                   <option value="employee">Employee</option>
-                  <option value="hr">HR</option>
+                  <option value="hr">Hr</option>
                 </select>
-                {errors.role && (
+
+                {errors.salary && (
                   <span className="text-red-500 text-sm">
                     This field is required
                   </span>
@@ -245,8 +249,8 @@ const Register = () => {
             </div>
 
             <div className="mt-6">
-              <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-500 rounded-lg hover:bg-green-400 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-50">
-                Sign Up
+              <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-green-500 rounded-lg hover:bg-green-400 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-50 uppercase">
+                register
               </button>
 
               <div className="mt-6 text-center ">

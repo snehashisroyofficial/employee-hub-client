@@ -1,59 +1,116 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { FaEyeSlash, FaLock, FaRegEye } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signInUser, googleSignIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { register, handleSubmit } = useForm();
+
+  const handleOnSubmit = (data) => {
+    signInUser(data.email, data.password)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+
   return (
     <div>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-          <form className="w-full max-w-md">
-            <div className="space-y-3">
-              <h1 className="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">
-                Lets Start
-              </h1>
-              <p>
-                Carefully read and fill up all the inputs with your original
-                information
-              </p>
-            </div>
-            <div className="relative flex items-center mt-8">
-              <span className="absolute">
-                <MdEmail className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
-              </span>
+      <section className="bg-white dark:bg-gray-900 ">
+        <div className=" flex items-center justify-center min-h-screen px-6 mx-auto">
+          <div className="w-full max-w-md border-2 p-8 rounded-xl">
+            <form onSubmit={handleSubmit(handleOnSubmit)}>
+              <div className="space-y-3">
+                <h1 className="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">
+                  Lets Start
+                </h1>
+                <p>
+                  Carefully read and fill up all the inputs with your original
+                  information
+                </p>
+              </div>
+              <div className="relative flex items-center mt-8">
+                <span className="absolute">
+                  <MdEmail className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" />
+                </span>
 
-              <input
-                type="email"
-                className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Email address"
-              />
-            </div>
+                <input
+                  type="email"
+                  className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  placeholder="Email address"
+                  {...register("email")}
+                />
+              </div>
 
-            <div className="relative flex items-center mt-4">
-              <span className="absolute ">
-                <FaLock className="w-5 h-5 mx-3  text-gray-300 dark:text-gray-500" />
-              </span>
+              <div className="relative flex items-center mt-4">
+                <span className="absolute ">
+                  <FaLock className="w-5 h-5 mx-3  text-gray-300 dark:text-gray-500" />
+                </span>
 
-              <input
-                type="password"
-                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Password"
-              />
-            </div>
+                <input
+                  type="password"
+                  className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  placeholder="Password"
+                  {...register("password")}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 uppercase"
+              >
+                login
+              </button>
+            </form>
 
             <div className="mt-6">
-              <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white  transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 uppercase">
-                Sign in
-              </button>
-
               <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
                 or sign in with
               </p>
 
-              <a
-                href="#"
-                className="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              <button
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <img
                   width="20"
@@ -63,7 +120,7 @@ const Login = () => {
                 />
 
                 <span className="mx-2">Sign in with Google</span>
-              </a>
+              </button>
 
               <div className="mt-6 text-center ">
                 <Link
@@ -74,7 +131,7 @@ const Login = () => {
                 </Link>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </div>
