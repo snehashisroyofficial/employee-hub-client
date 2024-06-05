@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import useAuth from "../../Hooks/useAuth";
+import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const WorkSheet = () => {
   const axiosPublic = useAxiosPublic();
@@ -62,13 +62,13 @@ const WorkSheet = () => {
     <div className="space-y-6">
       {/* task add form  */}
       <div>
-        <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+        <section className="max-w-4xl p-6 mx-auto bg-orange-200 rounded-md shadow-md dark:bg-gray-800">
           <h2 className="text-2xl py-6 font-semibold text-gray-700 capitalize dark:text-white">
             Add Work
           </h2>
 
           <form onSubmit={handleOnSubmit}>
-            <div className="flex  gap-4">
+            <div className="flex  gap-4 ">
               {/* tasks  */}
               <div>
                 <label
@@ -138,11 +138,11 @@ const WorkSheet = () => {
         </section>
       </div>
       {/* table tasks  */}
-      <div className="max-w-4xl mx-auto  bg-white rounded-md shadow-md dark:bg-gray-800 p-10">
+      <div className="max-w-4xl mx-auto  bg-blue-100 rounded-md shadow-md dark:bg-gray-800 p-10">
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
-            <thead className="bg-blue-600 text-xl text-white">
+            <thead className="bg-blue-500 text-xl text-white ">
               <tr>
                 <th>No.</th>
                 <th>Task</th>
@@ -154,7 +154,7 @@ const WorkSheet = () => {
               {/* row 1 */}
               {worksheet?.map((workData, idx) => (
                 <tr key={workData._id}>
-                  <th>{idx}</th>
+                  <th>{idx + 1}</th>
                   <td>{workData.task}</td>
                   <td>{workData.work}</td>
                   <td>{new Date(workData.date).toLocaleDateString()}</td>

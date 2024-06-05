@@ -6,7 +6,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useRole = () => {
   const { user, loading } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { data: role } = useQuery({
+  const { data: role, isPending: isLoading } = useQuery({
     queryKey: [user?.email, "role"],
     enabled: !loading,
     queryFn: async () => {
@@ -14,7 +14,7 @@ const useRole = () => {
       return res.data.role;
     },
   });
-  return [role];
+  return [role, isLoading];
 };
 
 export default useRole;
