@@ -6,8 +6,9 @@ import Register from "../Pages/Authentication/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
 import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
-import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList";
+import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList/EmployeeList";
 import Progress from "../Pages/Dashboard/Hr/Progress";
+import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
 
 const route = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const route = createBrowserRouter([
       {
         path: "progress",
         element: <Progress />,
+      },
+      {
+        path: "salarysheet-details/:email",
+        element: <EmployeeDetails />,
       },
     ],
   },

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import Modal from "../../../Components/Modal/Modal";
+import Modal from "../../../../Components/Modal/Modal";
+import { Link } from "react-router-dom";
 const EmployeeList = () => {
   const axiosPublic = useAxiosPublic();
   const [data, setData] = useState([]);
@@ -95,7 +96,9 @@ const EmployeeList = () => {
                   )}
                 </td>
                 <td>
-                  <button className="btn ">View Details</button>
+                  <Link to={`/dashboard/salarysheet-details/${work?.email}`}>
+                    <button className="btn btn-info">Details</button>
+                  </Link>
                 </td>
               </tr>
             ))}

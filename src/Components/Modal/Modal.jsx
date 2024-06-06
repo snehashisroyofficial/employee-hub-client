@@ -1,7 +1,11 @@
 import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { IoMdClose } from "react-icons/io";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 const Modal = ({ data, onClose }) => {
+  const axiosPublic = useAxiosPublic();
+
   const [showyear, setYear] = useState(null);
 
   const modalRef = useRef();
@@ -22,7 +26,26 @@ const Modal = ({ data, onClose }) => {
     const year = showyear;
 
     const formData = { name, email, salary, month, year };
-    console.log(formData);
+
+    axiosPublic
+      .post("/salary-sheet", formData)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Payment Successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        onClose();
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
 
   return (
