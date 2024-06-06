@@ -96,7 +96,7 @@ const EmployeeList = () => {
                   )}
                 </td>
                 <td>
-                  <Link to={`/dashboard/salarysheet-details/${work?.email}`}>
+                  <Link to={`/dashboard/salarysheet-details/${work?._id}`}>
                     <button className="btn btn-info">Details</button>
                   </Link>
                 </td>

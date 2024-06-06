@@ -50,8 +50,10 @@ const route = createBrowserRouter([
         element: <Progress />,
       },
       {
-        path: "salarysheet-details/:email",
+        path: "salarysheet-details/:id",
         element: <EmployeeDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/salary-sheet/${params.id}`),
       },
     ],
   },

@@ -20,12 +20,13 @@ const Modal = ({ data, onClose }) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const userId = data._id;
     const email = data.email;
     const salary = form.salary.value;
     const month = form.month.value;
     const year = showyear;
 
-    const formData = { name, email, salary, month, year };
+    const formData = { name, userId, email, salary, month, year };
 
     axiosPublic
       .post("/salary-sheet", formData)
