@@ -15,6 +15,49 @@ const Progress = () => {
     },
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const month = form.month.value;
+    const filterValue = { name, month };
+
+    if (filterValue.name && filterValue.month) {
+      const datafilter = work.filter(
+        (item) =>
+          item.name === filterValue.name &&
+          moment(item.date).format("MMMM") === filterValue.month
+      );
+
+      setFilterData(datafilter);
+      refetch();
+    } else if (filterValue.name || filterValue.month) {
+      if (filterValue.name) {
+        const datafilter = work.filter(
+          (item) => item.name === filterValue.name
+        );
+
+        setFilterData(datafilter);
+        refetch();
+      } else {
+        const datafilter = work.filter(
+          (item) => moment(item.date).format("MMMM") === filterValue.month
+        );
+
+        setFilterData(datafilter);
+        refetch();
+      }
+    }
+  };
+
+  if (filterData) {
+    const totalWorkingHours = filterData.reduce(
+      (total, item) => total + item.workingHours,
+      0
+    );
+    setTotalhours(totalWorkingHours);
+  }
+  console.log(totalHours);
   return (
     <div>
       <form onSubmit={handleSubmit}>
