@@ -27,10 +27,11 @@ const WorkSheet = () => {
     e.preventDefault();
     const form = e.target;
     const task = form.task.value;
-    const work = form.workinghours.value;
+    const workingHours = form.workinghours.value;
     const date = startDate;
     const email = user.email;
-    const taskDetails = { task, work, date, email };
+    const name = user.displayName;
+    const taskDetails = { name, email, task, workingHours, date };
 
     axiosPublic
       .post("/work-sheet", taskDetails)
@@ -47,8 +48,6 @@ const WorkSheet = () => {
         console.log(error.message);
       });
   };
-
-  console.log(worksheet);
 
   if (dataLoding) {
     return (
@@ -156,7 +155,7 @@ const WorkSheet = () => {
                 <tr key={workData._id}>
                   <th>{idx + 1}</th>
                   <td>{workData.task}</td>
-                  <td>{workData.work}</td>
+                  <td>{workData.workingHours}</td>
                   <td>{new Date(workData.date).toLocaleDateString()}</td>
                 </tr>
               ))}

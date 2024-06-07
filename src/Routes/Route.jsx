@@ -7,7 +7,7 @@ import Dashboard from "../Layout/Dashboard";
 import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
 import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList/EmployeeList";
-import Progress from "../Pages/Dashboard/Hr/Progress";
+import Progress from "../Pages/Dashboard/Hr/Progress/Progress";
 import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
 
 const route = createBrowserRouter([
