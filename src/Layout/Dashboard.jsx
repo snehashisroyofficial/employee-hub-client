@@ -95,7 +95,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className=" rounded-xl flex ">
+    <div className=" rounded-xl flex font-body ">
       <div className="min-h-screen w-[20% ]  bg-gray-200 menu  p-10">
         {user && (
           <h1 className="text-4xl font-bold">Hi, {user?.displayName}</h1>
