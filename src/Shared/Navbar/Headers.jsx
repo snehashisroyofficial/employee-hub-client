@@ -5,10 +5,14 @@ import { IoMdClose } from "react-icons/io";
 import { ImSwitch } from "react-icons/im";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useRole from "../../Hooks/useRole";
 
 const Headers = () => {
   const [menu, setMenu] = useState(true);
   const { user, logoutUser } = useAuth();
+
+  const [role, isLoading] = useRole();
+
   const handleOnChange = () => {
     setMenu(!menu);
   };
@@ -25,6 +29,29 @@ const Headers = () => {
     });
   };
 
+  const employeeDashboard = (
+    <>
+      <Link to="/dashboard/work-sheet">Dashboard</Link>
+    </>
+  );
+
+  const hrDashboard = (
+    <>
+      <Link to="/dashboard/employee-list">Dashboard</Link>
+    </>
+  );
+
+  const AdminDashboard = (
+    <>
+      <Link to="/dashboard/all-employee-list">Dashboard</Link>
+    </>
+  );
+
+  const normalDashboard = (
+    <>
+      <Link to="/dashboard">Dashboard</Link>
+    </>
+  );
   return (
     <div className="bg-[#222222]">
       <nav className="flex justify-between items-center px-4  md:w-[92%] mx-auto h-20 ">
@@ -53,7 +80,13 @@ const Headers = () => {
               className="w-full font-semibold px-5 py-4  hover:text-orange-500
               "
             >
-              <Link to="/dashboard">Dashboard</Link>
+              {role === "admin"
+                ? AdminDashboard
+                : role === "hr"
+                ? hrDashboard
+                : role === "employee"
+                ? employeeDashboard
+                : normalDashboard}
             </li>
             <li
               className="w-full font-semibold px-5 py-4  hover:text-orange-500

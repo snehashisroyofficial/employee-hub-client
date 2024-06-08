@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineWorkOutline } from "react-icons/md";
 const Progress = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [filterData, setFilterData] = useState([]);
   const { data: work = [], refetch } = useQuery({
     queryKey: ["work"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/work-sheet");
+      const res = await axiosSecure.get("/work-sheet");
       return res.data;
     },
   });

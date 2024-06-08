@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { useLoaderData, Link } from "react-router-dom";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { BsCalendar2Date } from "react-icons/bs";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -21,7 +21,7 @@ import Swal from "sweetalert2";
 
 const EmployeeDetails = () => {
   const loadData = useLoaderData();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const [showyear, setYear] = useState(null);
 
@@ -119,7 +119,7 @@ const EmployeeDetails = () => {
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="salary" fill="#139A43">
+              <Bar dataKey="salary" fill="#135BB9">
                 <LabelList dataKey="salary" position="top" />
               </Bar>
             </BarChart>

@@ -11,6 +11,7 @@ const Login = () => {
   const { signInUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
 

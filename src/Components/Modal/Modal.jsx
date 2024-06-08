@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { IoMdClose } from "react-icons/io";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 const Modal = ({ data, onClose }) => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const [showyear, setYear] = useState(null);
 
@@ -38,7 +38,7 @@ const Modal = ({ data, onClose }) => {
       year,
     };
 
-    axiosPublic
+    axiosSecure
       .post("/salary-sheet", formData)
       .then(() => {
         Swal.fire({

@@ -4,10 +4,10 @@ import { FaCheck } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
 import { IoShieldHalfOutline } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 const AllEmployeeList = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: verifiedUser = [],
@@ -16,13 +16,13 @@ const AllEmployeeList = () => {
   } = useQuery({
     queryKey: ["verifiedUser"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/verified-employee");
+      const res = await axiosSecure.get("/verified-employee");
       return res.data;
     },
   });
 
   const handleMakeHr = (email, name) => {
-    axiosPublic
+    axiosSecure
       .patch(`/update-hr/${email}`)
       .then(() => {
         refetch();
@@ -49,7 +49,7 @@ const AllEmployeeList = () => {
       confirmButtonText: "Yes, Fired!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic
+        axiosSecure
           .patch(`/update-fired/${email}`)
           .then(() => {
             refetch();

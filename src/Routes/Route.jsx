@@ -11,6 +11,7 @@ import Progress from "../Pages/Dashboard/Hr/Progress/Progress";
 import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
 import ContactUs from "../Pages/Dashboard/Admin/ContactUs/ContactUs";
+import PrivateRoute from "./PrivateRoute";
 
 const route = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ const route = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "work-sheet",

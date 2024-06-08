@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
@@ -7,14 +7,14 @@ import Swal from "sweetalert2";
 import Modal from "../../../../Components/Modal/Modal";
 import { Link } from "react-router-dom";
 const EmployeeList = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const { data: workdata, refetch } = useQuery({
     queryKey: ["workdata"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
@@ -23,7 +23,7 @@ const EmployeeList = () => {
     const isVerified = "true";
     const updateData = { isVerified };
 
-    axiosPublic
+    axiosSecure
       .patch(`/users/${id}`, updateData)
       .then((res) => {
         refetch();
@@ -47,7 +47,7 @@ const EmployeeList = () => {
   };
 
   const handleDeleteData = () => {
-    axiosPublic
+    axiosSecure
       .delete("/delete-all")
       .then(() => {
         Swal.fire({

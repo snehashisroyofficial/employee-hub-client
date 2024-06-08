@@ -4,10 +4,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const WorkSheet = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
   const { user, loading } = useAuth();
   const {
@@ -18,7 +18,7 @@ const WorkSheet = () => {
     queryKey: ["worksheet"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosPublic.get(`/work-sheet/${user?.email}`);
+      const res = await axiosSecure.get(`/work-sheet/${user?.email}`);
       return res.data;
     },
   });
@@ -33,7 +33,7 @@ const WorkSheet = () => {
     const name = user.displayName;
     const taskDetails = { name, email, task, workingHours, date };
 
-    axiosPublic
+    axiosSecure
       .post("/work-sheet", taskDetails)
       .then(() => {
         refetch();
