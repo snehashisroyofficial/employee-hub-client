@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
+import { MdOutlineWorkOutline } from "react-icons/md";
 const Progress = () => {
   const axiosPublic = useAxiosPublic();
-  const [filterData, setFilterData] = useState(null);
-  const [totalHours, setTotalhours] = useState(null);
+  const [filterData, setFilterData] = useState([]);
   const { data: work = [], refetch } = useQuery({
     queryKey: ["work"],
     queryFn: async () => {
@@ -14,6 +14,45 @@ const Progress = () => {
       return res.data;
     },
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const month = form.month.value;
+    const filterValue = { name, month };
+
+    if (filterValue.name && filterValue.month) {
+      const datafilter = work.filter(
+        (item) =>
+          item.name === filterValue.name &&
+          moment(item.date).format("MMMM") === filterValue.month
+      );
+
+      setFilterData(datafilter);
+      refetch();
+    } else if (filterValue.name || filterValue.month) {
+      if (filterValue.name) {
+        const datafilter = work.filter(
+          (item) => item.name === filterValue.name
+        );
+
+        setFilterData(datafilter);
+        refetch();
+      } else {
+        const datafilter = work.filter(
+          (item) => moment(item.date).format("MMMM") === filterValue.month
+        );
+
+        setFilterData(datafilter);
+        refetch();
+      }
+    }
+  };
+
+  const totalWorkingHours =
+    filterData.length > 0 &&
+    filterData.reduce((total, item) => total + parseInt(item.workingHours), 0);
 
   return (
     <div>
@@ -68,38 +107,63 @@ const Progress = () => {
         </div>
       </form>
 
-      <div>
-        <h2 className="text-4xl">{totalHours}</h2>
+      <div className="flex gap-6 my-6">
+        <div>
+          {totalWorkingHours && (
+            <div className="p-4 rounded-lg space-y-4 bg-blue-100 w-fit">
+              <h2 className="flex items-center gap-2 text-blue-900">
+                <MdOutlineWorkOutline />
+                Total Working Hours
+              </h2>
+              <h2 className="text-6xl font-semibold text-blue-800">
+                {totalWorkingHours}
+              </h2>
+            </div>
+          )}
+        </div>
+        <div>
+          {filterData.length > 0 && (
+            <div className="p-4 rounded-lg space-y-4 bg-orange-100 w-fit">
+              <h2 className="flex items-center gap-2 text-orange-900">
+                <MdOutlineWorkOutline />
+                Total Working Days
+              </h2>
+              <h2 className="text-6xl font-semibold text-orange-800">
+                {filterData.length}
+              </h2>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="max-w-2xl p-2  sm:p-4 text-gray-800">
-        <h2 className="mb-4 text-2xl font-semibold leading-tight">All Task</h2>
+      <div className="max-w-6xl  mx-auto p-2  sm:p-4 ">
+        <h2 className="mb-4 text-2xl font-semibold leading-tight">All Tasks</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full text-xs">
-            <thead className="bg-gray-300">
-              <tr className="text-left">
-                <th className="p-3">Employee Name</th>
-                <th className="p-3">Task</th>
-                <th className="p-3">Working Hours</th>
-                <th className="p-3">Month</th>
+          <table className="min-w-full  ">
+            <thead className="bg-orange-300">
+              <tr className="text-left ">
+                <th className="p-3 text-center">Employee Name</th>
+                <th className="p-3 text-center">Task</th>
+                <th className="p-3 text-center">Working Hours</th>
+                <th className="p-3 text-center">Month</th>
               </tr>
             </thead>
             <tbody>
-              {filterData
+              {filterData.length > 0
                 ? filterData.map((data, idx) => (
                     <tr
                       key={idx}
-                      className="border-b border-opacity-20 border-gray-300 bg-gray-50"
+                      className="border-b border-opacity-20 border-orange-300 bg-orange-50"
                     >
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.name}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.task}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.workingHours} hrs</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{moment(data.date).format("MMMM")}</p>
                       </td>
                     </tr>
@@ -107,18 +171,18 @@ const Progress = () => {
                 : work.map((data, idx) => (
                     <tr
                       key={idx}
-                      className="border-b border-opacity-20 border-gray-300 bg-gray-50"
+                      className="border-b border-opacity-20 border-orange-300 bg-orange-50"
                     >
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.name}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.task}</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{data.workingHours} hrs</p>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 text-center">
                         <p>{moment(data.date).format("MMMM")}</p>
                       </td>
                     </tr>
