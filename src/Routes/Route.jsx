@@ -10,6 +10,7 @@ import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList/EmployeeList";
 import Progress from "../Pages/Dashboard/Hr/Progress/Progress";
 import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
+import ContactUs from "../Pages/Dashboard/Admin/ContactUs/ContactUs";
 
 const route = createBrowserRouter([
   {
@@ -59,7 +60,10 @@ const route = createBrowserRouter([
       {
         path: "all-employee-list",
         element: <AllEmployeeList />,
-        loader: () => fetch("http://localhost:5000/verified-employee"),
+      },
+      {
+        path: "contact-us",
+        element: <ContactUs />,
       },
     ],
   },

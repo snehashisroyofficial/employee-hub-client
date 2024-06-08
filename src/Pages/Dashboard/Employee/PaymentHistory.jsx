@@ -1,29 +1,61 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAuth from "../../../Hooks/useAuth";
+import moment from "moment";
 
 const PaymentHistory = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const { user } = useAuth();
+
+  const {
+    data: paymentData = [],
+    refetch,
+    isPending: loading,
+  } = useQuery({
+    queryKey: ["paymentData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/payment-history/${user?.email}`);
+      return res.data;
+    },
+  });
+
+  console.log(paymentData);
   return (
     <div>
-      <div className="max-w-4xl mx-auto  bg-white rounded-md shadow-md dark:bg-gray-800 p-10">
+      {/* table section started  */}
+
+      <div className="max-w-4xl  mx-auto p-2  sm:p-4 ">
+        <h2 className="my-10 text-2xl font-semibold leading-tight">
+          Payment History
+        </h2>
         <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead className="bg-blue-600 text-xl text-white ">
-              <tr>
-                <th>Month</th>
-                <th>Amount</th>
-                <th>Transaction Id.</th>
+          <table className="min-w-full  ">
+            <thead className="bg-gray-300/30">
+              <tr className="">
+                <th className="p-3 text-center">Month</th>
+                <th className="p-3 text-center">Amount</th>
+                <th className="p-3 text-center">Transaction Id.</th>
               </tr>
             </thead>
             <tbody>
-              {/* row 1
-              {worksheet?.map((workData, idx) => (
-                <tr key={workData._id}>
-                  <th>{idx + 1}</th>
-                  <td>{workData.task}</td>
-                  <td>{workData.work}</td>
-                  <td>{new Date(workData.date).toLocaleDateString()}</td>
+              {paymentData.map((data, idx) => (
+                <tr
+                  key={idx}
+                  className="border-b border-opacity-20 border-gray-500 "
+                >
+                  <td className="p-3 text-center capitalize">
+                    <p>{data.month}</p>
+                  </td>
+                  <td className="p-3 text-center ">
+                    <p>{data.salary}</p>
+                  </td>
+                  <td className="p-3 text-center">
+                    <p>No data ...</p>
+                  </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </div>

@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 const AllEmployeeList = () => {
-  //   const userData = useLoaderData();
   const axiosPublic = useAxiosPublic();
 
   const {
