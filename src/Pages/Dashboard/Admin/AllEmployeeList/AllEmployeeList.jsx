@@ -22,9 +22,9 @@ const AllEmployeeList = () => {
     },
   });
 
-  const handleUpdate = (email, name) => {
+  const handleMakeHr = (email, name) => {
     axiosPublic
-      .patch(`/update-account-status/${email}`)
+      .patch(`/update-hr/${email}`)
       .then(() => {
         refetch();
         Swal.fire({
@@ -37,6 +37,35 @@ const AllEmployeeList = () => {
       .catch((error) => {
         console.log(error.message);
       });
+  };
+
+  const handleFired = (email, name) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Fired!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .patch(`/update-fired/${email}`)
+          .then(() => {
+            refetch();
+            Swal.fire({
+              icon: "success",
+              title: `${name} Successfully Fired `,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    });
   };
 
   if (loading) {
@@ -87,21 +116,28 @@ const AllEmployeeList = () => {
                       </button>
                     ) : (
                       <button
-                        onClick={() => handleUpdate(data.email, data.name)}
+                        onClick={() => handleMakeHr(data.email, data.name)}
                         className="btn  bg-yellow-400 rounded-full"
                       >
-                        {" "}
                         HR
                         <ImBlocked />
                       </button>
                     )}
                   </td>
                   <td className="p-3 text-center">
-                    <button className="btn rounded-full">
-                      {" "}
-                      <ImBlocked />
-                      fired
-                    </button>{" "}
+                    {data.accountStatus === "true" ? (
+                      <button
+                        disabled={data.role === "admin"}
+                        onClick={() => handleFired(data.email, data.name)}
+                        className="btn bg-red-600  text-white rounded-full"
+                      >
+                        <ImBlocked className="text-lg " />
+                      </button>
+                    ) : (
+                      <button className="btn bg-red-600 text-white rounded-full">
+                        fired
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
