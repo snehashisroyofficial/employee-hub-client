@@ -65,7 +65,7 @@ const Dashboard = () => {
     <>
       <li>
         <NavLink
-          to="dashboard/work-sheet"
+          to="/dashboard/all-employee-list"
           className={({ isActive }) =>
             isActive ? "text-orange-600 w-fit" : "hover:bg-yellow-200 "
           }
@@ -86,13 +86,13 @@ const Dashboard = () => {
     </>
   );
 
-  if (isLoading) {
-    return (
-      <div>
-        <span className="loading min-h-screen mx-auto  flex justify-center items-center loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <span className="loading min-h-screen mx-auto  flex justify-center items-center loading-spinner loading-lg"></span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className=" rounded-xl flex font-body ">

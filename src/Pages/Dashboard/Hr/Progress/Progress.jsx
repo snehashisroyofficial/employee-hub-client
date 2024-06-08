@@ -56,15 +56,16 @@ const Progress = () => {
 
   return (
     <div>
+      {/* filter and stats  */}
       <div className="flex justify-center gap-6 my-6">
         <div>
           {totalWorkingHours && (
-            <div className="p-4 rounded-lg space-y-4 bg-blue-100 w-fit">
-              <h2 className="flex items-center gap-2 text-blue-900">
+            <div className="p-4 rounded-lg space-y-4 bg-pink-100 w-fit">
+              <h2 className="flex items-center gap-2 text-pink-900">
                 <MdOutlineWorkOutline />
                 Total Working Hours
               </h2>
-              <h2 className="text-6xl font-semibold text-blue-800">
+              <h2 className="text-6xl font-semibold text-pink-800">
                 {totalWorkingHours}
               </h2>
             </div>
@@ -85,7 +86,7 @@ const Progress = () => {
         </div>
 
         <form
-          className="p-4 rounded-lg space-y-4 bg-green-100 w-fit"
+          className="p-4 rounded-lg space-y-4 bg-blue-100 w-fit"
           onSubmit={handleSubmit}
         >
           <h2>Filter Data</h2>
@@ -141,12 +142,15 @@ const Progress = () => {
           </div>
         </form>
       </div>
+
+      {/* table section started  */}
+
       <div className="max-w-6xl  mx-auto p-2  sm:p-4 ">
         <h2 className="mb-4 text-2xl font-semibold leading-tight">All Tasks</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full  ">
             <thead className="bg-gray-300/30">
-              <tr className="text-left ">
+              <tr className="">
                 <th className="p-3 text-center">Employee Name</th>
                 <th className="p-3 text-center">Task</th>
                 <th className="p-3 text-center">Working Hours</th>

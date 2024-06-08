@@ -46,58 +46,85 @@ const EmployeeList = () => {
     setShowModal(true);
   };
 
+  const handleDeleteData = () => {
+    axiosPublic
+      .delete("/delete-all")
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Task Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
-    <div className=" mx-auto   rounded-md shadow-md dark:bg-gray-800 p-10 font-body">
+    <div className="  dark:bg-gray-800 p-10 font-body">
+      <button onClick={handleDeleteData} className="btn">
+        Delete All Data
+      </button>
       <div className="overflow-x-auto">
-        <table className="table ">
+        <table className="min-w-full  border-2">
           {/* head */}
-          <thead className="bg-violet-600 text-xl text-white ">
+          <thead className="bg-gray-300/30 ">
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Verified</th>
-              <th>Bank Account</th>
-              <th>Salary</th>
-              <th>Pay</th>
-              <th>Details</th>
+              <th className="p-6 text-center">Name</th>
+              <th className="p-6 text-center">Email</th>
+              <th className="p-6 text-center">Verified</th>
+              <th className="p-6 text-center">Bank Account</th>
+              <th className="p-6 text-center">Salary</th>
+              <th className="p-6 text-center">Pay</th>
+              <th className="p-6 text-center">Details</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
             {workdata?.map((work, idx) => (
-              <tr key={work._id} className="text-lg ">
-                <th>{work.name}</th>
-                <td>{work.email}</td>
-                <td>
+              <tr
+                key={work._id}
+                className="border-b border-opacity-20 border-gray-500 "
+              >
+                <td className="p-2 text-center">{work.name}</td>
+                <td className="p-2 text-center">{work.email}</td>
+                <td className="p-2 text-center">
                   {work.isVerified === "true" ? (
-                    <FaCheckCircle className="text-2xl text-green-600" />
+                    <button>
+                      <FaCheckCircle className="text-2xl text-green-600" />
+                    </button>
                   ) : (
                     <button onClick={() => handleSetVerified(work._id)}>
-                      <MdCancel className="text-2xl text-red-600" />
+                      <MdCancel className="text-2xl text-red-600 " />
                     </button>
                   )}
                 </td>
-                <td>{work.bank_account_no}</td>
-                <td>{work.salary}</td>
-                <td>
+                <td className="p-2 text-center">{work.bank_account_no}</td>
+                <td className="p-2 text-center">{work.salary}</td>
+                <td className="p-2 text-center">
                   {work.isVerified === "true" ? (
                     <button
                       onClick={() => handleDoubleClick(work)}
-                      className="btn  bg-success text-white"
+                      className="btn  rounded-full bg-green-500 text-white"
                     >
                       {" "}
                       Pay
                     </button>
                   ) : (
-                    <button disabled className="btn  bg-success">
+                    <button disabled className="btn  rounded-full">
                       {" "}
                       Pay
                     </button>
                   )}
                 </td>
-                <td>
+                <td className="p-2 text-center">
                   <Link to={`/dashboard/salarysheet-details/${work?._id}`}>
-                    <button className="btn btn-info">Details</button>
+                    <button className="btn rounded-full bg-blue-500 text-white">
+                      Details
+                    </button>
                   </Link>
                 </td>
               </tr>

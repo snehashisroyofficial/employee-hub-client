@@ -9,6 +9,7 @@ import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList/EmployeeList";
 import Progress from "../Pages/Dashboard/Hr/Progress/Progress";
 import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
+import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
 
 const route = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ const route = createBrowserRouter([
         element: <EmployeeDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/salary-sheet/${params.id}`),
+      },
+      {
+        path: "all-employee-list",
+        element: <AllEmployeeList />,
+        loader: () => fetch("http://localhost:5000/verified-employee"),
       },
     ],
   },

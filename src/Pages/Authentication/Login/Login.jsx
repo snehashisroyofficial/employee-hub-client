@@ -47,6 +47,7 @@ const Login = () => {
           designation: "",
           role: "employee",
           isVerified: "false",
+          accountStatus: "true",
         };
         axiosPublic
           .post("/users", userDetails)

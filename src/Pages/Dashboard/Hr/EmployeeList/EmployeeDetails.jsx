@@ -54,7 +54,6 @@ const EmployeeDetails = () => {
     );
   }
 
-  console.log(loadData.length);
   return (
     <div className="min-h-screen">
       {/* top section  */}
@@ -98,7 +97,7 @@ const EmployeeDetails = () => {
         </div>
       </div>
 
-      {filterData.length ? (
+      {filterData.length > 0 ? (
         <div className="h-96 ">
           <h1 className="text-xl font-semibold text-center py-10">
             Salary sheet data of {selectedYear}

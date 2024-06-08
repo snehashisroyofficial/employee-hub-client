@@ -57,6 +57,7 @@ const Register = () => {
       designation: data.designation,
       role: data.role,
       isVerified: "false",
+      accountStatus: "true",
     };
 
     console.log(userDetails);
