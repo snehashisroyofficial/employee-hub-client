@@ -54,27 +54,29 @@ const EmployeeDetails = () => {
     );
   }
 
+  console.log(loadData[1]?.name);
   return (
     <div className="min-h-screen">
       {/* top section  */}
       <div className="flex items-center  gap-4 max-h-52 ">
-        <div className="p-4 h-full border-2 rounded-lg flex flex-col  gap-4 shadow-sm">
-          <h1 className=" font-semibold   flex items-center gap-2">
-            <FaRegUserCircle className="text-xl text-blue-600 " /> Employee Name
+        <div className="p-4 rounded-lg space-y-4 bg-yellow-100 w-fit">
+          <h1 className="flex items-center gap-2 text-yellow-900">
+            <FaRegUserCircle className="text-xl text-yellow-600 " /> Employee
+            Name
           </h1>
-          <h1 className="text-3xl font-semibold text-green-900 capitalize">
-            {loadData[1]?.name}
+          <h1 className="text-3xl font-semibold text-yellow-800 capitalize">
+            {loadData[0]?.name}
           </h1>
         </div>
 
         <div>
           {/* total payout  */}
-          <div className="p-4 h-full border-2 rounded-lg  flex flex-col  gap-4 shadow-sm">
-            <h1 className=" font-semibold   flex items-center gap-2">
+          <div className="p-4 rounded-lg space-y-4 bg-green-100 w-fit">
+            <h1 className="flex items-center gap-2 text-green-900">
               <BiMoneyWithdraw className="text-xl text-green-600 " />
               Total Payout
             </h1>
-            <h1 className="text-3xl font-semibold text-green-900">
+            <h1 className="text-4xl font-semibold text-green-800">
               ${totalSalary}
             </h1>
           </div>

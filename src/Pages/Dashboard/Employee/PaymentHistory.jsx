@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
-import moment from "moment";
 
 const PaymentHistory = () => {
   const axiosPublic = useAxiosPublic();
@@ -21,7 +20,6 @@ const PaymentHistory = () => {
     },
   });
 
-  console.log(paymentData);
   return (
     <div>
       {/* table section started  */}
