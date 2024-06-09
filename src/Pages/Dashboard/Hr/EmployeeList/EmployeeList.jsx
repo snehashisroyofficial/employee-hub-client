@@ -46,28 +46,8 @@ const EmployeeList = () => {
     setShowModal(true);
   };
 
-  const handleDeleteData = () => {
-    axiosSecure
-      .delete("/delete-all")
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Task Added",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        refetch();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
   return (
     <div className="  dark:bg-gray-800 p-10 font-body">
-      <button onClick={handleDeleteData} className="btn">
-        Delete All Data
-      </button>
       <div className="overflow-x-auto">
         <table className="min-w-full  border-2">
           {/* head */}

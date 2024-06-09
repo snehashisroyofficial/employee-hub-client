@@ -5,15 +5,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import "./slider.css";
 
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { EffectFade, Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const Banner = () => {
   return (
     <div className="pt-10 pb-20 font-body">
       <Swiper
         loop={true}
+        effect={"fade"}
         spaceBetween={30}
-        modules={[Navigation, Autoplay, Pagination]}
+        modules={[EffectFade, Navigation, Autoplay, Pagination]}
         autoplay={{
           delay: 3000,
           pauseOnMouseEnter: true,

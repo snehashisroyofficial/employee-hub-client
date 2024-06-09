@@ -1,0 +1,32 @@
+[
+  {
+    "author": "John Smith",
+    "position": "Marketing Manager",
+    "feedback": "The streamlined task submission and approval process saves me tons of time!",
+    "authorimage": "https://images.unsplash.com/flagged/photo-1553642618-de0381320ff3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "author": "Jane Doe",
+    "position": "HR Specialist",
+    "feedback": "Submitting daily tasks with clear descriptions ensures everyone on the team is aligned. ",
+    "authorimage": "https://images.unsplash.com/photo-1634136906717-6421833e1b7a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "author": "David Lee",
+    "position": "HR Manager",
+    "feedback": "Having a centralized platform for daily tasks and monthly salary deposits gives me peace of mind. ",
+    "authorimage": "https://plus.unsplash.com/premium_photo-1669627111428-a524797d9b97?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "author": "Sarah Jones",
+    "position": "Customer Service Representative",
+    "feedback": "The contact form makes it convenient to reach the admin for any questions.",
+    "authorimage": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "author": "David Williams",
+    "position": "CEO",
+    "feedback": "This system has improved communication and efficiency across all departments.",
+    "authorimage": "https://plus.unsplash.com/premium_photo-1666299357356-db1ed4a6d50b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
+]
