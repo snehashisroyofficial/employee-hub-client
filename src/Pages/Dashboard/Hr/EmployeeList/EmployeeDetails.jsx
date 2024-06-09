@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import { useLoaderData, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { BsCalendar2Date } from "react-icons/bs";
 import { BiMoneyWithdraw } from "react-icons/bi";
@@ -17,13 +17,25 @@ import {
   LabelList,
   Cell,
 } from "recharts";
-import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const EmployeeDetails = () => {
-  const loadData = useLoaderData();
+  const params = useParams();
   const axiosSecure = useAxiosSecure();
 
   const [showyear, setYear] = useState(null);
+
+  const {
+    data: loadData = [],
+    isPending: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ["loadData"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/salary-sheet/${params.id}`);
+      return res.data;
+    },
+  });
 
   const salaryConvertInt = loadData.map((item) => ({
     ...item,
@@ -43,7 +55,7 @@ const EmployeeDetails = () => {
     0
   );
 
-  if (!loadData.length) {
+  if (loading) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center gap-2">
         <h1 className="text-2xl  "> No data Available</h1>

@@ -12,6 +12,9 @@ import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails"
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
 import ContactUs from "../Pages/Dashboard/Admin/ContactUs/ContactUs";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import HrRoute from "./HrRoute";
+import EmployeeRoute from "./EmployeeRoute";
 
 const route = createBrowserRouter([
   {
@@ -42,33 +45,55 @@ const route = createBrowserRouter([
     children: [
       {
         path: "work-sheet",
-        element: <WorkSheet />,
+        element: (
+          <EmployeeRoute>
+            <WorkSheet />
+          </EmployeeRoute>
+        ),
       },
       {
         path: "payment-history",
-        element: <PaymentHistory />,
+        element: (
+          <EmployeeRoute>
+            <PaymentHistory />
+          </EmployeeRoute>
+        ),
       },
       {
         path: "employee-list",
-        element: <EmployeeList />,
+        element: (
+          <HrRoute>
+            <EmployeeList />
+          </HrRoute>
+        ),
       },
       {
         path: "progress",
-        element: <Progress />,
+        element: (
+          <HrRoute>
+            <Progress />
+          </HrRoute>
+        ),
       },
       {
         path: "salarysheet-details/:id",
         element: <EmployeeDetails />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/salary-sheet/${params.id}`),
       },
       {
         path: "all-employee-list",
-        element: <AllEmployeeList />,
+        element: (
+          <AdminRoute>
+            <AllEmployeeList />
+          </AdminRoute>
+        ),
       },
       {
         path: "contact-us",
-        element: <ContactUs />,
+        element: (
+          <AdminRoute>
+            <ContactUs />
+          </AdminRoute>
+        ),
       },
     ],
   },

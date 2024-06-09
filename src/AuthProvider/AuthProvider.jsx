@@ -51,15 +51,15 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
 
-      //jwt token create
-
-      const userEmail = currentUser?.email || user?.email;
-      const userDetails = { email: userEmail };
-
       if (currentUser) {
-        axiosPublic
-          .post("/jwt", userDetails)
-          .then((res) => console.log(res.data));
+        const userEmail = { email: currentUser.email };
+        axiosPublic.post("/jwt", userEmail).then((res) => {
+          localStorage.setItem("access-token", res.data.token);
+          setLoading(false);
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
       }
     });
     return () => {

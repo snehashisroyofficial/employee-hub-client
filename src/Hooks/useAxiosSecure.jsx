@@ -5,31 +5,38 @@ import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
-  withCredentials: true,
 });
 
 const useAxiosSecure = () => {
-  const { logoutUser } = useAuth();
+  const { user, logoutUser } = useAuth();
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axiosSecure.interceptors.response.use(
-      (res) => {
-        return res;
-      },
+  axiosSecure.interceptors.request.use(
+    (res) => {
+      const token = localStorage.getItem("access-token");
+      res.headers.Authorization = `Bearer ${token}`;
+      return res;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
-      (error) => {
-        if (error.response.status === 401 || error.response.status === 403) {
-          logoutUser()
-            .then(() => {
-              navigate("/");
-            })
-            .catch((error) => console.log(error.message));
-        }
+  axiosSecure.interceptors.response.use(
+    (res) => {
+      return res;
+    },
+    (error) => {
+      const status = error.response.status;
+      console.log(status);
+      if (status === 401 || status === 403) {
+        logoutUser();
+        navigate("/login");
       }
-    );
-  }, []);
+      return Promise.reject(error);
+    }
+  );
 
   return axiosSecure;
 };
