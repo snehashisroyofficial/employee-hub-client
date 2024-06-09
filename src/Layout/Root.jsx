@@ -9,7 +9,7 @@ const Root = () => {
     location.pathname.includes("register");
 
   return (
-    <div>
+    <div className="font-body">
       {noNavFooter || <Headers />}
       <Outlet />
       {noNavFooter || <Footer />}
