@@ -9,6 +9,7 @@ import { RiProgress3Line } from "react-icons/ri";
 import { MdOutlineContactSupport } from "react-icons/md";
 import useRole from "../Hooks/useRole";
 import moment from "moment";
+import useAccountStatus from "../Hooks/useAccountStatus";
 
 //
 
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   console.log(user);
   const [role, isLoading] = useRole();
+  const [accountStatus] = useAccountStatus();
   const employeeLinks = (
     <>
       <li className="  flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
@@ -100,6 +102,20 @@ const Dashboard = () => {
       </li>
     </>
   );
+
+  if (accountStatus === "false") {
+    return (
+      <div className="min-h-screen mx-auto font-body   justify-center items-center flex flex-col gap-4 ">
+        <h1 className="text-6xl text-red-600 font-extrabold">
+          Your're Fired !
+        </h1>
+        <p>Please contact your hr for more details information</p>
+        <Link to="/">
+          <button className="btn btn-primary">Home</button>
+        </Link>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
