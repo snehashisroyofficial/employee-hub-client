@@ -32,13 +32,13 @@ Live Website Link : https://emloyeehub.web.app/
 Email Id:
 
 ```bash
- admin@employeehub.com
+admin@employeehub.com
 ```
 
 Password:
 
 ```bash
- admin2024
+admin2024
 ```
 
 ## Authors
