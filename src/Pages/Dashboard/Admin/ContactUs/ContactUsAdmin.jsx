@@ -26,7 +26,7 @@ const ContactUsAdmin = () => {
 
   return (
     <div>
-      <div className="max-w-4xl  mx-auto p-2  sm:p-4 ">
+      <div className="max-w-6xl  mx-auto p-2  sm:p-4 ">
         <h2 className="my-10 text-2xl font-semibold leading-tight">
           All Messages
         </h2>
