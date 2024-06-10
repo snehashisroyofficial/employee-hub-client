@@ -54,8 +54,8 @@ const Headers = () => {
     </>
   );
   return (
-    <div className="bg-[#222222] ">
-      <nav className="flex justify-between items-center px-4   md:w-[92%] mx-auto h-20 ">
+    <div className="bg-[#222222] relative ">
+      <nav className="flex  justify-between items-center px-4  z-20 md:w-[92%] mx-auto h-20 ">
         {/* hamburger  */}
         <div className="md:hidden text-white" onClick={handleOnChange}>
           {menu ? (

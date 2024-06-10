@@ -8,6 +8,7 @@ import Modal from "../../../../Components/Modal/Modal";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { Helmet } from "react-helmet";
 const EmployeeList = () => {
   const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([]);
@@ -53,6 +54,9 @@ const EmployeeList = () => {
 
   return (
     <div className="  dark:bg-gray-800 p-10 font-body">
+      <Helmet>
+        <title>HR Dashboard - Employee List</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="min-w-full  border-2">
           {/* head */}

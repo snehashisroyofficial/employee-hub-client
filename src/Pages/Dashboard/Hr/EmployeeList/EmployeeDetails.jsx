@@ -18,6 +18,7 @@ import {
   Cell,
 } from "recharts";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const EmployeeDetails = () => {
   const params = useParams();
@@ -69,6 +70,9 @@ const EmployeeDetails = () => {
   console.log(loadData[1]?.name);
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>HR Dashboard - Employee Details</title>
+      </Helmet>
       {/* top section  */}
       <div className="flex items-center  gap-4 max-h-52 ">
         <div className="p-4 rounded-lg space-y-4 bg-yellow-100 w-fit">

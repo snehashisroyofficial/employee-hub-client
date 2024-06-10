@@ -6,6 +6,7 @@ import { IoShieldHalfOutline } from "react-icons/io5";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 const AllEmployeeList = () => {
   const axiosSecure = useAxiosSecure();
 
@@ -77,6 +78,9 @@ const AllEmployeeList = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Dashboard - All Employee List</title>
+      </Helmet>
       <div className="max-w-6xl  mx-auto p-2  sm:p-4 ">
         <h2 className="mb-4 text-2xl font-semibold leading-tight">
           All Verified Employee's

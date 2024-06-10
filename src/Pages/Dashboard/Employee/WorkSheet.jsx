@@ -6,6 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 
 const WorkSheet = () => {
   const axiosSecure = useAxiosSecure();
@@ -60,6 +61,9 @@ const WorkSheet = () => {
 
   return (
     <div className="space-y-6">
+      <Helmet>
+        <title>Employee Dashboard - WorkSheet</title>
+      </Helmet>
       {/* task add form  */}
       <div>
         <section className="max-w-4xl p-6 mx-auto  ">

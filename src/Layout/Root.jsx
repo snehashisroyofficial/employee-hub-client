@@ -10,8 +10,10 @@ const Root = () => {
 
   return (
     <div className="font-body">
-      {noNavFooter || <Headers />}
-      <Outlet />
+      <div className="z-20">{noNavFooter || <Headers />}</div>
+      <div className="max-w-6xl min-h-[calc(100vh-332px)] mx-auto">
+        <Outlet />
+      </div>
       {noNavFooter || <Footer />}
     </div>
   );

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ const PaymentHistory = () => {
       {/* table section started  */}
 
       <div className="max-w-4xl  mx-auto p-2  sm:p-4 ">
+        <Helmet>
+          <title>Employee Dashboard - Payment History</title>
+        </Helmet>
         <h2 className="my-10 text-2xl font-semibold leading-tight">
           Payment History
         </h2>

@@ -32,7 +32,7 @@ const Banner = () => {
               alt="this is test image 1"
             />
             <div className=" flex justify-center items-center flex-col text-white absolute inset-0  bg-black bg-opacity-40  space-y-4  ">
-              <h1 className="px-9 max-w-2xl text-center font-pacifico text-6xl font-bold">
+              <h1 className="px-9 max-w-2xl text-center font-pacifico  text-4xl md:text-6xl font-bold">
                 Simplified Daily Work Logging
               </h1>
 
@@ -52,7 +52,7 @@ const Banner = () => {
               alt="this is test image 1"
             />
             <div className=" flex justify-center items-center flex-col text-white absolute inset-0  bg-black bg-opacity-40  space-y-4  ">
-              <h1 className="px-9 max-w-2xl text-center font-pacifico text-6xl font-bold">
+              <h1 className="px-9 max-w-2xl text-center font-pacifico text-4xl md:text-6xl font-bold">
                 Efficient Payroll Management
               </h1>
 
@@ -72,7 +72,7 @@ const Banner = () => {
               alt="this is test image 1"
             />
             <div className=" flex justify-center items-center flex-col text-white absolute inset-0  bg-black bg-opacity-40  space-y-4  ">
-              <h1 className="px-9 max-w-2xl text-center font-pacifico text-6xl font-bold">
+              <h1 className="px-9 max-w-2xl text-center font-pacifico text-4xl md:text-6xl font-bold">
                 Comprehensive User Control
               </h1>
 
@@ -92,7 +92,7 @@ const Banner = () => {
               alt="this is test image 1"
             />
             <div className=" flex justify-center items-center flex-col text-white absolute inset-0  bg-black bg-opacity-40  space-y-4  ">
-              <h1 className="px-9 max-w-2xl text-center font-pacifico text-6xl font-bold">
+              <h1 className="px-9 max-w-2xl text-center font-pacifico text-4xl md:text-6xl font-bold">
                 Enhance Employee Engagement
               </h1>
 
@@ -112,7 +112,7 @@ const Banner = () => {
               alt="this is test image 1"
             />
             <div className=" flex justify-center items-center flex-col text-white absolute inset-0  bg-black bg-opacity-40  space-y-4  ">
-              <h1 className="px-9 max-w-2xl text-center font-pacifico text-6xl font-bold">
+              <h1 className="px-9 max-w-2xl text-center font-pacifico text-4xl md:text-6xl font-bold">
                 Centralized HR Management
               </h1>
 
