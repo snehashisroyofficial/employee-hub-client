@@ -1,14 +1,15 @@
+import { SiSimplenote } from "react-icons/si";
+
 const Footer = () => {
   return (
     <footer className="bg-black text-white dark:bg-gray-900">
       <div className="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row">
-        <a href="#">
-          <img
-            className="w-auto h-7"
-            src="https://merakiui.com/images/full-logo.svg"
-            alt=""
-          />
-        </a>
+        <div>
+          <h2 className="text-white font-semibold md:text-2xl font-navbar  flex items-center gap-2 ">
+            <SiSimplenote className="text-green-400" />
+            Employee Hub
+          </h2>
+        </div>
 
         <p className="text-sm  dark:text-gray-300">
           © Copyright 2021. All Rights Reserved.
