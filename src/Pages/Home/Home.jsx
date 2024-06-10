@@ -3,6 +3,7 @@ import Banner from "../../Components/Modal/Banner";
 import Services from "../../Components/Modal/Services";
 import Testimonials from "../../Components/Modal/Testimonials";
 import Portfolio from "../../Components/Modal/Portfolio";
+import Faq from "../../Components/Modal/Faq";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Services />
       <Testimonials />
       <Portfolio />
+      <Faq />
     </div>
   );
 };

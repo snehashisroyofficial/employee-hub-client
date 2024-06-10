@@ -2,7 +2,7 @@ import React from "react";
 
 const Portfolio = () => {
   return (
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900 ">
       <div class="container px-6 py-10 mx-auto">
         <div className="container mx-auto p-4 my-6 space-y-2 text-center">
           <h2 className="text-5xl font-bold">Portfolio</h2>

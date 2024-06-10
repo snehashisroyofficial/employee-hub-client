@@ -9,7 +9,7 @@ import { EffectFade, Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const Banner = () => {
   return (
-    <div className="pt-10 pb-20 font-body">
+    <div className="  my-20 font-body">
       <Swiper
         loop={true}
         effect={"fade"}

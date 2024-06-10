@@ -7,7 +7,7 @@ import { MdAddTask } from "react-icons/md";
 import { MdOutlineSecurity } from "react-icons/md";
 const Services = () => {
   return (
-    <section className="  text-gray-800">
+    <section className=" my-40  text-gray-800">
       <div className="container mx-auto p-4 my-6 space-y-2 text-center">
         <h2 className="text-5xl font-bold">What We Offer</h2>
         <p className="text-gray-600 max-w-md mx-auto">
