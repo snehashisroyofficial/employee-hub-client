@@ -139,12 +139,6 @@ const Dashboard = () => {
               <p class="mx-2 mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">
                 {user?.email}
               </p>
-              <p class="mx-2 mt-1 text-xs font-medium text-gray-600 dark:text-gray-400">
-                Last Login:{" "}
-                {moment(user?.metadata?.lastSignInTime).format(
-                  "MMMM Do YYYY, h:mm:ss a"
-                )}
-              </p>
             </div>
           )}
 
@@ -170,6 +164,12 @@ const Dashboard = () => {
               </NavLink>
             </li>
           </ul>
+          <p class="mx-2 mt-1 text-xs font-medium text-gray-600 dark:text-gray-400 flex justify-content-end">
+            Last Login:{" "}
+            {moment(user?.metadata?.lastSignInTime).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            )}
+          </p>
         </div>
       </div>
 

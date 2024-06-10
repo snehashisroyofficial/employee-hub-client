@@ -1,14 +1,24 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { IoMdClose } from "react-icons/io";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 const Modal = ({ data, onClose }) => {
   const axiosSecure = useAxiosSecure();
-
+  const stripe = useStripe();
+  const elements = useElements();
   const [showyear, setYear] = useState(null);
-
+  const [error, setError] = useState("");
   const modalRef = useRef();
+  const [totalPrice, setPrice] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
 
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
@@ -16,47 +26,104 @@ const Modal = ({ data, onClose }) => {
     }
   };
 
-  console.log(data);
-  const handleFormSubmit = (e) => {
+  useEffect(() => {
+    if (totalPrice) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
+  }, [totalPrice, axiosSecure]);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const userId = data._id;
-    const monthlySalary = data.salary;
-    const email = data.email;
-    const salary = form.salary.value;
-    const month = form.month.value;
-    const year = showyear;
 
-    const formData = {
-      name,
-      userId,
-      monthlySalary,
-      email,
-      salary,
-      month,
-      year,
-    };
+    if (!stripe || !elements) {
+      return;
+    }
 
-    axiosSecure
-      .post("/salary-sheet", formData)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Payment Successfull",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        onClose();
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: `${error.message}`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    const card = elements.getElement(CardElement);
+
+    if (card === null) {
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+
+    if (error) {
+      setError(error.message);
+      console.log("payment error", error);
+    } else {
+      setError("");
+      console.log("payment method", paymentMethod);
+    }
+
+    // confirm payment
+    const { paymentIntent, error: cardConfirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: data.email,
+            name: data.name,
+          },
+        },
       });
+
+    if (cardConfirmError) {
+      console.log("confirm error", cardConfirmError);
+    } else {
+      console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        setTransactionId(paymentIntent.id);
+
+        const form = e.target;
+        const name = form.name.value;
+        const userId = data._id;
+        const monthlySalary = data.salary;
+        const email = data.email;
+        const salary = totalPrice;
+        const month = form.month.value;
+        const year = showyear;
+        const transactionID = paymentIntent.id;
+
+        const formData = {
+          name,
+          userId,
+          monthlySalary,
+          email,
+          salary,
+          month,
+          year,
+          transactionID,
+        };
+        console.log(formData);
+        axiosSecure
+          .post("/salary-sheet", formData)
+          .then(() => {
+            setTransactionId("");
+            Swal.fire({
+              icon: "success",
+              title: "Payment Successfull",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            onClose();
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: `${error.message}`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      }
+    }
   };
 
   return (
@@ -100,6 +167,7 @@ const Modal = ({ data, onClose }) => {
                 type="number"
                 name="salary"
                 required
+                onBlur={(e) => setPrice(e.target.value)}
                 defaultValue={data.salary}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
               />
@@ -155,13 +223,42 @@ const Modal = ({ data, onClose }) => {
               </div>
             </div>
 
+            {/* payment  */}
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
+                  },
+                },
+              }}
+            />
+
             <div className="mt-6">
-              <button className="btn bg-green-600 text-white w-full ">
+              <button
+                // disabled={!stripe || !clientSecret}
+                className="btn bg-green-600 text-white w-full "
+              >
                 {" "}
                 Pay
               </button>
             </div>
+            <p className="text-red-600">{error}</p>
+            {transactionId && (
+              <p className="text-green-600 text-center my-6">
+                Payment Successfull
+              </p>
+            )}
           </form>
+
+          <div></div>
         </div>
       </div>
     </div>

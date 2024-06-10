@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Modal from "../../../../Components/Modal/Modal";
 import { Link } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 const EmployeeList = () => {
   const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([]);
@@ -45,6 +47,9 @@ const EmployeeList = () => {
     setData(work);
     setShowModal(true);
   };
+
+  // add publishable key
+  const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
   return (
     <div className="  dark:bg-gray-800 p-10 font-body">
@@ -111,11 +116,14 @@ const EmployeeList = () => {
             ))}
           </tbody>
         </table>
-        <div className="transition ease-in-out delay-150">
+        <div className="transition ease-in-out delay-150"></div>
+
+        {/* payment  */}
+        <Elements stripe={stripePromise}>
           {showModal && (
             <Modal data={data} onClose={() => setShowModal(false)} />
           )}
-        </div>
+        </Elements>
       </div>
     </div>
   );

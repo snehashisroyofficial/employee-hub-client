@@ -50,7 +50,7 @@ const PaymentHistory = () => {
                     <p>{data.salary}</p>
                   </td>
                   <td className="p-3 text-center">
-                    <p>No data ...</p>
+                    <p>{data.transactionID}</p>
                   </td>
                 </tr>
               ))}
