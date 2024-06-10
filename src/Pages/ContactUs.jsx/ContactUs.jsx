@@ -66,7 +66,7 @@ const ContactUs = () => {
                 </svg>
 
                 <span className="mx-2 text-gray-700 truncate w-72 dark:text-gray-400">
-                  Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522
+                  Barrackpore, Kolkata
                 </span>
               </p>
 
@@ -87,7 +87,7 @@ const ContactUs = () => {
                 </svg>
 
                 <span className="mx-2 text-gray-700 truncate w-72 dark:text-gray-400">
-                  (257) 563-7401
+                  +91 98756232326
                 </span>
               </p>
 
@@ -108,7 +108,7 @@ const ContactUs = () => {
                 </svg>
 
                 <span className="mx-2 text-gray-700 truncate w-72 dark:text-gray-400">
-                  acb@example.com
+                  bongradar@gmail.com
                 </span>
               </p>
             </div>
