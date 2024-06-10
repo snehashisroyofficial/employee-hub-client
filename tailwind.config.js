@@ -5,8 +5,9 @@ export default {
     extend: {
       fontFamily: {
         body: ["Inter"],
+        navbar: ["Gluten", "cursive"],
       },
-      container: {
+      cUnboundedntainer: {
         center: true,
       },
       backgroundImage: {

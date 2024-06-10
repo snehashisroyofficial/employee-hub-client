@@ -5,7 +5,7 @@ import Testimonials from "../../Components/Modal/Testimonials";
 
 const Home = () => {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4 ">
       <Banner />
       <Services />
       <Testimonials />

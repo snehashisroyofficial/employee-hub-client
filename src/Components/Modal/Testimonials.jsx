@@ -24,7 +24,7 @@ const Testimonials = () => {
         spaceBetween={30}
         modules={[Autoplay, Pagination]}
         autoplay={{
-          delay: 1000,
+          delay: 3000,
           pauseOnMouseEnter: true,
         }}
         className="mySwiper  "
@@ -32,7 +32,7 @@ const Testimonials = () => {
         {Feedback.map((item, idx) => (
           <SwiperSlide key={idx} className=" h-full py-4">
             {" "}
-            <div className="w-full p-8 h-full shadow-md  bg-white rounded-md border-2 dark:bg-gray-800 max-w-lg">
+            <div className="w-full p-8 h-full shadow-md  bg-gray-100 rounded-md  dark:bg-gray-800 max-w-lg">
               <p className="leading-loose text-gray-500 dark:text-gray-400">
                 " {item.feedback} "
               </p>

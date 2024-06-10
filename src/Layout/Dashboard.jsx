@@ -111,7 +111,7 @@ const Dashboard = () => {
 
   return (
     <div className=" h-screen flex font-body bg-gray-300 ">
-      <div className="h-screen w-1/6 px-4 py-8  ">
+      <div className="h-screen w-1/5 px-4 py-8  ">
         <div className="h-full  bg-white px-8 rounded-3xl ">
           <h1
             className={`text-2xl text-center  uppercase p-2    ${

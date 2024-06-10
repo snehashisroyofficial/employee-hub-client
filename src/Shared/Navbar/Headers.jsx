@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { SiSimplenote } from "react-icons/si";
 import { ImSwitch } from "react-icons/im";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -53,8 +54,8 @@ const Headers = () => {
     </>
   );
   return (
-    <div className="bg-[#222222]">
-      <nav className="flex justify-between items-center px-4  md:w-[92%] mx-auto h-20 ">
+    <div className="bg-[#222222] ">
+      <nav className="flex justify-between items-center px-4   md:w-[92%] mx-auto h-20 ">
         {/* hamburger  */}
         <div className="md:hidden text-white" onClick={handleOnChange}>
           {menu ? (
@@ -66,7 +67,10 @@ const Headers = () => {
 
         {/* navbar start  */}
         <div>
-          <h2 className="text-white font-semibold md:text-4xl">Employee Hub</h2>
+          <h2 className="text-white font-semibold md:text-4xl font-navbar  flex items-center gap-2 ">
+            <SiSimplenote className="text-green-400" />
+            Employee Hub
+          </h2>
         </div>
 
         {/* navbar center  */}
@@ -116,7 +120,7 @@ const Headers = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] shadow p-4  dropdown-content bg-base-100  w-52"
+                className="mt-3 z-10 shadow p-4 -right-2   dropdown-content bg-base-100  w-fit border-2 border-red-600"
               >
                 <Link>
                   <button
