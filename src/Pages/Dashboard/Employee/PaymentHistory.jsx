@@ -30,7 +30,7 @@ const PaymentHistory = () => {
         </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full  ">
-            <thead className="bg-gray-300/30">
+            <thead className="bg-green-300/30">
               <tr className="">
                 <th className="p-3 text-center">Month</th>
                 <th className="p-3 text-center">Amount</th>
@@ -41,7 +41,7 @@ const PaymentHistory = () => {
               {paymentData.map((data, idx) => (
                 <tr
                   key={idx}
-                  className="border-b border-opacity-20 border-gray-500 "
+                  className="border-b border-opacity-20 border-green-500 "
                 >
                   <td className="p-3 text-center capitalize">
                     <p>{data.month}</p>

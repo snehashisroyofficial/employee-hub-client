@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import moment from "moment";
 
 const WorkSheet = () => {
   const axiosSecure = useAxiosSecure();
@@ -61,7 +62,7 @@ const WorkSheet = () => {
     <div className="space-y-6">
       {/* task add form  */}
       <div>
-        <section className="max-w-4xl p-6 mx-auto bg-orange-200 rounded-md shadow-md dark:bg-gray-800">
+        <section className="max-w-4xl p-6 mx-auto  ">
           <h2 className="text-2xl py-6 font-semibold text-gray-700 capitalize dark:text-white">
             Add Work
           </h2>
@@ -115,11 +116,11 @@ const WorkSheet = () => {
                 >
                   Date
                 </label>
-                <div className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                <div>
                   <DatePicker
                     selected={startDate}
                     dateFormat="dd/MM/yyyy"
-                    className="w-full"
+                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     onChange={(date) => setStartDate(date)}
                   />
                 </div>
@@ -137,26 +138,32 @@ const WorkSheet = () => {
         </section>
       </div>
       {/* table tasks  */}
-      <div className="max-w-4xl mx-auto  bg-blue-100 rounded-md shadow-md dark:bg-gray-800 p-10">
+      <div className="max-w-4xl  mx-auto p-2  sm:p-4 ">
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="min-w-full ">
             {/* head */}
-            <thead className="bg-blue-500 text-xl text-white ">
+            <thead className="bg-blue-500 text-white ">
               <tr>
-                <th>No.</th>
-                <th>Task</th>
-                <th>Hours worked</th>
-                <th>Date</th>
+                <th className="p-3 text-center">No.</th>
+                <th className="p-3 text-center">Task</th>
+                <th className="p-3 text-center">Hours worked</th>
+                <th className="p-3 text-center">Date</th>
               </tr>
             </thead>
             <tbody>
               {/* row 1 */}
               {worksheet?.map((workData, idx) => (
-                <tr key={workData._id}>
-                  <th>{idx + 1}</th>
-                  <td>{workData.task}</td>
-                  <td>{workData.workingHours}</td>
-                  <td>{new Date(workData.date).toLocaleDateString()}</td>
+                <tr
+                  key={workData._id}
+                  className="border-b border-opacity-20 border-blue-500 "
+                >
+                  <td className="p-3 text-center">{idx + 1}</td>
+                  <td className="p-3 text-center">{workData.task}</td>
+                  <td className="p-3 text-center">{workData.workingHours}</td>
+                  <td className="p-3 text-center">
+                    {moment(workData.date).format("D MMM  YY")}
+                    {/* {new Date(workData.date).toLocaleDateString()} */}
+                  </td>
                 </tr>
               ))}
             </tbody>
