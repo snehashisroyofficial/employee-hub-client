@@ -10,11 +10,12 @@ import EmployeeList from "../Pages/Dashboard/Hr/EmployeeList/EmployeeList";
 import Progress from "../Pages/Dashboard/Hr/Progress/Progress";
 import EmployeeDetails from "../Pages/Dashboard/Hr/EmployeeList/EmployeeDetails";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
-import ContactUs from "../Pages/Dashboard/Admin/ContactUs/ContactUs";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
+import ContactUsAdmin from "../Pages/Dashboard/Admin/ContactUs/ContactUsAdmin";
+import ContactUs from "../Pages/ContactUs.jsx/ContactUs";
 
 const route = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const route = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "contact-us",
+        element: <ContactUs />,
       },
     ],
   },
@@ -51,6 +56,7 @@ const route = createBrowserRouter([
           </EmployeeRoute>
         ),
       },
+
       {
         path: "payment-history",
         element: (
@@ -91,7 +97,7 @@ const route = createBrowserRouter([
         path: "contact-us",
         element: (
           <AdminRoute>
-            <ContactUs />
+            <ContactUsAdmin />
           </AdminRoute>
         ),
       },

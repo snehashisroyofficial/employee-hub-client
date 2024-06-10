@@ -53,7 +53,7 @@ const WorkSheet = () => {
   if (dataLoding) {
     return (
       <div>
-        <span className="loading min-h-screen mx-auto loading-spinner loading-lg"></span>
+        <span className="loading flex justify-center items-center min-h-screen mx-auto loading-spinner loading-lg"></span>
       </div>
     );
   }

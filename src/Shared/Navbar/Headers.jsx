@@ -92,7 +92,7 @@ const Headers = () => {
               className="w-full font-semibold px-5 py-4  hover:text-orange-500
               "
             >
-              <Link>Contact us</Link>
+              <Link to="/contact-us">Contact us</Link>
             </li>
           </ul>
         </div>

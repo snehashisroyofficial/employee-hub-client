@@ -110,9 +110,9 @@ const Dashboard = () => {
   }
 
   return (
-    <div className=" rounded-xl flex font-body bg-gray-300 ">
-      <div className="min-h-screen w-1/6 px-4 py-8  ">
-        <div className="min-h-screen  bg-white px-8 rounded-3xl ">
+    <div className=" h-screen flex font-body bg-gray-300 ">
+      <div className="h-screen w-1/6 px-4 py-8  ">
+        <div className="h-full  bg-white px-8 rounded-3xl ">
           <h1
             className={`text-2xl text-center  uppercase p-2    ${
               role === "admin"
@@ -174,7 +174,7 @@ const Dashboard = () => {
       </div>
 
       <div className="flex-1  p-8 ">
-        <div className="flex-1 p-10 bg-white h-screen rounded-3xl ">
+        <div className="flex-1 p-10 bg-white h-full rounded-3xl overflow-y-auto  ">
           <Outlet />
         </div>
       </div>
