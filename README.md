@@ -1,6 +1,4 @@
-# ASSIGNMENT - 12 (Employee Hub)
-
-## [ Employee Hub - Employee Management Portal](https://emloyeehub.web.app/)
+## Employee Hub - Employee Management Portal
 
 Website Name : Employee Hub
 
