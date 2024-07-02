@@ -2,6 +2,8 @@
 
 Website Name : Employee Hub
 
+Description: Employee Hub - A comprehensive employee management system with a dashboard for task registration, HR functionalities for viewing employee details and processing salaries, and admin controls for authorizing employees and HR.
+
 Live Website Link : https://emloyeehub.web.app/
 
 ## npm packages that I used for this project
